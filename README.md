@@ -12,4 +12,4 @@ INSERT INTO feedings (begin_time, end_time, side) VALUES ('2019-03-01 10:14:00',
 INSERT INTO feedings (begin_time, end_time, side) VALUES ('2019-03-01 12:12:00', '2019-03-01 12:41:00','L');
 INSERT INTO feedings (begin_time, end_time, side) VALUES ('2019-03-01 14:15:00', '2019-03-01 14:33:00','L');
 INSERT INTO feedings (begin_time, end_time, side) VALUES ('2019-03-01 16:28:00', '2019-03-01 16:50:00','L');
-SELECT * FROM feedings;```
+SELECT * FROM feedings;
