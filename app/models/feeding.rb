@@ -8,89 +8,167 @@ class Feeding
   def self.all
     results = DB.exec(
       <<-SQL
-        SELECT *
-        FROM feedings;
+        SELECT
+          feedings.*,
+          foods.food
+        FROM feedings LEFT JOIN foods
+          ON time>(start_time-interval '6 hours')
+          AND time<(start_time-interval '1 hour');
       SQL
     )
-    return results.map do |result|
-      {
-        "id" => result["id"].to_i,
-        "start_time" => result["start_time"],
-        "end_time" => result["end_time"],
-        "side" => result["side"]
-      }
+
+    feedings = []
+    last_feeding_id = nil
+    results.each do |result|
+      if result["id"] != last_feeding_id
+        feedings << {
+          "id" => result["id"].to_i,
+          "start_time" => result["start_time"],
+          "end_time" => result["end_time"],
+          "side" => result["side"],
+          "foods" => []
+        }
+      end
+      if result["food"]
+        feedings.last["foods"] << result["food"]
+      end
+      last_feeding_id = result["id"]
     end
+
+    return feedings
   end
 
   def self.all_by_side(side)
     results = DB.exec(
       <<-SQL
-        SELECT *
-        FROM feedings
+        SELECT
+          feedings.*,
+          foods.food
+        FROM feedings LEFT JOIN foods
+          ON time>(start_time-interval '6 hours')
+          AND time<(start_time-interval '1 hour')
         WHERE side='#{side.upcase}';
       SQL
     )
-    return results.map do |result|
-      {
-        "id" => result["id"].to_i,
-        "start_time" => result["start_time"],
-        "end_time" => result["end_time"],
-        "side" => result["side"]
-      }
+
+    feedings = []
+    last_feeding_id = nil
+    results.each do |result|
+      if result["id"] != last_feeding_id
+        feedings << {
+          "id" => result["id"].to_i,
+          "start_time" => result["start_time"],
+          "end_time" => result["end_time"],
+          "side" => result["side"],
+          "foods" => []
+        }
+      end
+      if result["food"]
+        feedings.last["foods"] << result["food"]
+      end
+      last_feeding_id = result["id"]
     end
+
+    return feedings
   end
 
   def self.all_of_last_n_hours(n)
     results = DB.exec(
-      <<-SQL
-        SELECT *
-        FROM feedings
+        <<-SQL
+        SELECT
+          feedings.*,
+          foods.food
+        FROM feedings LEFT JOIN foods
+          ON time>(start_time-interval '6 hours')
+          AND time<(start_time-interval '1 hour')
         WHERE end_time > (current_timestamp - interval '#{n} hours')
       SQL
     )
-    return results.map do |result|
-      {
-        "id" => result["id"].to_i,
-        "start_time" => result["start_time"],
-        "end_time" => result["end_time"],
-        "side" => result["side"]
-      }
+
+    feedings = []
+    last_feeding_id = nil
+    results.each do |result|
+      if result["id"] != last_feeding_id
+        feedings << {
+          "id" => result["id"].to_i,
+          "start_time" => result["start_time"],
+          "end_time" => result["end_time"],
+          "side" => result["side"],
+          "foods" => []
+        }
+      end
+      if result["food"]
+        feedings.last["foods"] << result["food"]
+      end
+      last_feeding_id = result["id"]
     end
+
+    return feedings
   end
 
   def self.all_between_times(start,finish)
     results = DB.exec(
       <<-SQL
-        SELECT *
-        FROM feedings
+        SELECT
+          feedings.*,
+          foods.food
+        FROM feedings LEFT JOIN foods
+          ON time>(start_time-interval '6 hours')
+          AND time<(start_time-interval '1 hour')
         WHERE end_time > '#{start[0..3]}-#{start[4..5]}-#{start[6..7]} #{start[8..9]}:#{start[10..11]}:#{start[12..13]}'
           AND start_time < '#{finish[0..3]}-#{finish[4..5]}-#{finish[6..7]} #{finish[8..9]}:#{finish[10..11]}:#{finish[12..13]}';
       SQL
     )
-    return results.map do |result|
-      {
-        "id" => result["id"].to_i,
-        "start_time" => result["start_time"],
-        "end_time" => result["end_time"],
-        "side" => result["side"]
-      }
+
+    feedings = []
+    last_feeding_id = nil
+    results.each do |result|
+      if result["id"] != last_feeding_id
+        feedings << {
+          "id" => result["id"].to_i,
+          "start_time" => result["start_time"],
+          "end_time" => result["end_time"],
+          "side" => result["side"],
+          "foods" => []
+        }
+      end
+      if result["food"]
+        feedings.last["foods"] << result["food"]
+      end
+      last_feeding_id = result["id"]
     end
+
+    return feedings
+    
   end
 
   def self.find(id)
     results = DB.exec(
       <<-SQL
-        SELECT *
-        FROM feedings
-        WHERE id=#{id}
+        SELECT
+          feedings.*,
+          foods.food
+        FROM feedings LEFT JOIN foods
+          ON time>(start_time-interval '6 hours')
+          AND time<(start_time-interval '1 hour')
+        WHERE feedings.id=#{id};
       SQL
     )
+
+    foods = []
+    results.each do |result|
+      if result["food"]
+        foods << result["food"]
+      end
+    end
+
     result = results.first;
     return {
       "id" => result["id"].to_i,
       "start_time" => result["start_time"],
       "end_time" => result["end_time"],
-      "side" => result["side"]
+      "side" => result["side"],
+      "foods" => foods
     }
   end
 
