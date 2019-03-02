@@ -2,7 +2,8 @@
 
 ## Basic Seed of Database
 
-```CREATE TABLE feedings (id SERIAL, begin_time TIMESTAMP, end_time TIMESTAMP, side CHAR(1));
+```
+CREATE TABLE feedings (id SERIAL, begin_time TIMESTAMPTZ, end_time TIMESTAMPTZ, side CHAR(1));
 INSERT INTO feedings (begin_time, end_time, side) VALUES ('2019-03-01 00:32:00', '2019-03-01 01:01:00','L');
 INSERT INTO feedings (begin_time, end_time, side) VALUES ('2019-03-01 02:22:00', '2019-03-01 03:01:00','L');
 INSERT INTO feedings (begin_time, end_time, side) VALUES ('2019-03-01 04:40:00', '2019-03-01 04:05:00','L');
