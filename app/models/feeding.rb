@@ -63,7 +63,8 @@ class Feeding
       <<-SQL
         SELECT *
         FROM feedings
-        WHERE end_time > '#{start}' AND start_time < '#{finish}';
+        WHERE end_time > '#{start[0..3]}-#{start[4..5]}-#{start[6..7]} #{start[8..9]}:#{start[10..11]}:#{start[12..13]}'
+          AND start_time < '#{finish[0..3]}-#{finish[4..5]}-#{finish[6..7]} #{finish[8..9]}:#{finish[10..11]}:#{finish[12..13]}';
       SQL
     )
     return results.map do |result|

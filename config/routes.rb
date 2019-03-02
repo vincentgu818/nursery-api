@@ -8,4 +8,10 @@ Rails.application.routes.draw do
   post '/feedings', to: 'feedings#create'
   delete '/feedings/:id', to: 'feedings#delete'
   put '/feedings/:id', to: 'feedings#update'
+
+  get '/foods', to: 'foods#index'
+  get '/foods/:id', to: 'foods#show'
+  post '/foods', to: 'foods#create'
+  delete '/foods/:id', to: 'foods#delete'
+  put '/foods/:id', to: 'foods#update'
 end
