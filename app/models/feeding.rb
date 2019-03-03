@@ -22,11 +22,12 @@ class Feeding
     last_feeding_id = nil
     results.each do |result|
       if result["id"] != last_feeding_id
+        duration = result["duration"][0..1].to_i*3600000+result["duration"][3..4].to_i*60000+result["duration"][6..7].to_i*1000
         feedings << {
           "id" => result["id"].to_i,
           "start_time" => result["start_time"],
           "end_time" => result["end_time"],
-          "duration" => result["duration"],
+          "duration" => duration,
           "side" => result["side"],
           "foods" => []
         }
@@ -58,11 +59,12 @@ class Feeding
     last_feeding_id = nil
     results.each do |result|
       if result["id"] != last_feeding_id
+        duration = result["duration"][0..1].to_i*3600000+result["duration"][3..4].to_i*60000+result["duration"][6..7].to_i*1000
         feedings << {
           "id" => result["id"].to_i,
           "start_time" => result["start_time"],
           "end_time" => result["end_time"],
-          "duration" => result["duration"],
+          "duration" => duration,
           "side" => result["side"],
           "foods" => []
         }
@@ -94,11 +96,12 @@ class Feeding
     last_feeding_id = nil
     results.each do |result|
       if result["id"] != last_feeding_id
+        duration = result["duration"][0..1].to_i*3600000+result["duration"][3..4].to_i*60000+result["duration"][6..7].to_i*1000
         feedings << {
           "id" => result["id"].to_i,
           "start_time" => result["start_time"],
           "end_time" => result["end_time"],
-          "duration" => result["duration"],
+          "duration" => duration,
           "side" => result["side"],
           "foods" => []
         }
@@ -131,11 +134,12 @@ class Feeding
     last_feeding_id = nil
     results.each do |result|
       if result["id"] != last_feeding_id
+        duration = result["duration"][0..1].to_i*3600000+result["duration"][3..4].to_i*60000+result["duration"][6..7].to_i*1000
         feedings << {
           "id" => result["id"].to_i,
           "start_time" => result["start_time"],
           "end_time" => result["end_time"],
-          "duration" => result["duration"],
+          "duration" => duration,
           "side" => result["side"],
           "foods" => []
         }
@@ -172,11 +176,12 @@ class Feeding
     end
 
     result = results.first;
+    duration = result["duration"][0..1].to_i*3600000+result["duration"][3..4].to_i*60000+result["duration"][6..7].to_i*1000
     return {
       "id" => result["id"].to_i,
       "start_time" => result["start_time"],
       "end_time" => result["end_time"],
-      "duration" => result["duration"],
+      "duration" => duration,
       "side" => result["side"],
       "foods" => foods
     }
