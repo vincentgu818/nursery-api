@@ -9,7 +9,7 @@ class FoodsController < ApplicationController
   end
 
   def create
-    render json: Food.create(params["food"])
+    render json: Food.create(params)
   end
 
   def delete
