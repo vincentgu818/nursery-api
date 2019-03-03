@@ -10,6 +10,7 @@ class Feeding
       <<-SQL
         SELECT
           feedings.*,
+          feedings.end_time-feedings.start_time AS duration,
           foods.food
         FROM feedings LEFT JOIN foods
           ON time>(start_time-interval '6 hours')
@@ -25,6 +26,7 @@ class Feeding
           "id" => result["id"].to_i,
           "start_time" => result["start_time"],
           "end_time" => result["end_time"],
+          "duration" => result["duration"],
           "side" => result["side"],
           "foods" => []
         }
@@ -43,6 +45,7 @@ class Feeding
       <<-SQL
         SELECT
           feedings.*,
+          feedings.end_time-feedings.start_time AS duration,
           foods.food
         FROM feedings LEFT JOIN foods
           ON time>(start_time-interval '6 hours')
@@ -59,6 +62,7 @@ class Feeding
           "id" => result["id"].to_i,
           "start_time" => result["start_time"],
           "end_time" => result["end_time"],
+          "duration" => result["duration"],
           "side" => result["side"],
           "foods" => []
         }
@@ -77,6 +81,7 @@ class Feeding
         <<-SQL
         SELECT
           feedings.*,
+          feedings.end_time-feedings.start_time AS duration,
           foods.food
         FROM feedings LEFT JOIN foods
           ON time>(start_time-interval '6 hours')
@@ -93,6 +98,7 @@ class Feeding
           "id" => result["id"].to_i,
           "start_time" => result["start_time"],
           "end_time" => result["end_time"],
+          "duration" => result["duration"],
           "side" => result["side"],
           "foods" => []
         }
@@ -111,6 +117,7 @@ class Feeding
       <<-SQL
         SELECT
           feedings.*,
+          feedings.end_time-feedings.start_time AS duration,
           foods.food
         FROM feedings LEFT JOIN foods
           ON time>(start_time-interval '6 hours')
@@ -128,6 +135,7 @@ class Feeding
           "id" => result["id"].to_i,
           "start_time" => result["start_time"],
           "end_time" => result["end_time"],
+          "duration" => result["duration"],
           "side" => result["side"],
           "foods" => []
         }
@@ -139,7 +147,7 @@ class Feeding
     end
 
     return feedings
-    
+
   end
 
   def self.find(id)
@@ -147,6 +155,7 @@ class Feeding
       <<-SQL
         SELECT
           feedings.*,
+          feedings.end_time-feedings.start_time AS duration,
           foods.food
         FROM feedings LEFT JOIN foods
           ON time>(start_time-interval '6 hours')
@@ -167,6 +176,7 @@ class Feeding
       "id" => result["id"].to_i,
       "start_time" => result["start_time"],
       "end_time" => result["end_time"],
+      "duration" => result["duration"],
       "side" => result["side"],
       "foods" => foods
     }

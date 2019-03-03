@@ -1,4 +1,4 @@
-class Feeding
+class Food
   DB = PG.connect({
     :host=> "localhost",
     :port => 5432,
