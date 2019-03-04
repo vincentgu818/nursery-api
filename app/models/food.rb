@@ -10,7 +10,8 @@ class Food
     results = DB.exec(
       <<-SQL
         SELECT *
-        FROM foods;
+        FROM foods
+        ORDER BY time DESC;
       SQL
     )
     return results.map do |result|
@@ -28,6 +29,7 @@ class Food
         SELECT *
         FROM foods
         WHERE id=#{id}
+        ORDER BY time DESC;
       SQL
     )
     result = results.first;
@@ -61,6 +63,7 @@ class Food
   end
 
   def self.update(id, opts)
+    puts "OPTS", opts
     results = DB.exec(
       <<-SQL
         UPDATE foods

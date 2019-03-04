@@ -15,7 +15,8 @@ class Feeding
           foods.food
         FROM feedings LEFT JOIN foods
           ON time>(start_time-interval '6 hours')
-          AND time<(start_time-interval '1 hour');
+          AND time<(start_time-interval '1 hour')
+        ORDER BY start_time DESC;
       SQL
     )
 
@@ -52,7 +53,8 @@ class Feeding
         FROM feedings LEFT JOIN foods
           ON time>(start_time-interval '6 hours')
           AND time<(start_time-interval '1 hour')
-        WHERE side='#{side.upcase}';
+        WHERE side='#{side.upcase}'
+        ORDER BY start_time DESC;
       SQL
     )
 
@@ -90,6 +92,7 @@ class Feeding
           ON time>(start_time-interval '6 hours')
           AND time<(start_time-interval '1 hour')
         WHERE end_time > (current_timestamp - interval '#{n} hours')
+        ORDER BY start_time DESC;
       SQL
     )
 
@@ -127,7 +130,8 @@ class Feeding
           ON time>(start_time-interval '6 hours')
           AND time<(start_time-interval '1 hour')
         WHERE end_time > '#{start[0..3]}-#{start[4..5]}-#{start[6..7]} #{start[8..9]}:#{start[10..11]}:#{start[12..13]}'
-          AND start_time < '#{finish[0..3]}-#{finish[4..5]}-#{finish[6..7]} #{finish[8..9]}:#{finish[10..11]}:#{finish[12..13]}';
+          AND start_time < '#{finish[0..3]}-#{finish[4..5]}-#{finish[6..7]} #{finish[8..9]}:#{finish[10..11]}:#{finish[12..13]}'
+        ORDER BY start_time DESC;
       SQL
     )
 
@@ -165,7 +169,8 @@ class Feeding
         FROM feedings LEFT JOIN foods
           ON time>(start_time-interval '6 hours')
           AND time<(start_time-interval '1 hour')
-        WHERE feedings.id=#{id};
+        WHERE feedings.id=#{id}
+        ORDER BY start_time DESC;
       SQL
     )
 
