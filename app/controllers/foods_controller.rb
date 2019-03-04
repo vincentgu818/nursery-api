@@ -17,7 +17,7 @@ class FoodsController < ApplicationController
   end
 
   def update
-    render json: Food.update(params["id"], params["food"])
+    render json: Food.update(params["id"], params)
   end
 
 end
