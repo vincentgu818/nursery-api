@@ -22,6 +22,7 @@ Update | PUT | /feedings/:id
 Delete | DELETE | /feedings/:id
 
 In addition, the Nursery API features the following routes.
+
 Function | Action | URL | Details
 --- | --- | --- | ---
 Read recent | GET | /feedings/last_hours/:num | Fetches all records with an end time in the past :num hours
